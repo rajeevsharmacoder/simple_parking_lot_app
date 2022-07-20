@@ -1,0 +1,39 @@
+{% extends 'layout.html' %}
+{% block head %}
+<script type="text/javascript">
+    function radioEvent(form) 
+    {
+        for (var i = 0; i < form.vehicle_type.length; i++) 
+        {
+            if (form.vehicle_type[i].checked)
+            {
+                if (form.vehicle_type[i].value == "2-WHEELER")
+                {
+                    para = document.getElementById("display_amount");
+                    para.innerText = "Take ₹200/- and let the person go! Click Exit button!!"
+                    para.hidden = false;
+                }
+                if (form.vehicle_type[i].value == "4-WHEELER")
+                {
+                    para = document.getElementById("display_amount");
+                    para.innerText = "Take ₹300/- and let the person go! Click Exit button!!"
+                    para.hidden = false;
+                }
+            }
+        }
+     }
+</script>
+{% endblock %}
+{% block body %}
+<h1>Ticket Lost?</h1>
+<form action="{% url 'parking_lot_app:ticket_lost' %}" method="post">
+    {% csrf_token %}
+    <input type="radio" id="vehicle_type" name="vehicle_type" value="2-WHEELER" onclick="radioEvent(this.form);" required>
+    <label id="two_wheeler">2-WHEELER</label>
+    <input type="radio" id="vehicle_type" name="vehicle_type" value="4-WHEELER" onclick="radioEvent(this.form);" required>
+    <label id="four_wheeler">4-WHEELER</label><br>
+    <input type="submit" value="Exit">
+    <a href="{% url 'parking_lot_app:index' %}">Cancel</a>
+</form>
+<p id="display_amount" hidden></p>
+{% endblock %}

@@ -1,0 +1,26 @@
+#heading-parking-lot {
+  margin-left: 38%;
+  margin-top: 8%;
+  align-content: center;
+  color: green;
+}
+
+.flex-container {
+  display: flex;
+  /* align-content: center; */
+}
+
+.flex-child {
+  flex: 1;
+  border: 2px solid green;
+  margin-right: 15%;
+  margin-left: 15%;
+  margin-top: 10%;
+  padding: 2%;
+  /* align-content: center; */
+}
+
+.flex-child:first-child {
+  margin-right: 15%;
+  /* align-content: center; */
+}

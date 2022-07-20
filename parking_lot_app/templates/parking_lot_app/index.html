@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+{%block head %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'parking_lot_app/style.css' %}">
+{% endblock %}
+{% block body %}
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+<div>
+    <div>
+        <div>
+            <label>2-Wheeler Slots Remaining:</label><br/>
+            {% if slots.two_wheeler_count > 0 %}
+            <label>{{ slots.two_wheeler_count }}</label>
+            {% else %}
+            <label>2-Wheeler Parking is FULL</label>
+            {% endif %}
+        </div>
+        
+        <div>
+            <label>4-Wheeler Slots Remaining:</label><br/>
+            {% if slots.four_wheeler_count > 0 %}
+            <label>{{ slots.four_wheeler_count }}</label>
+            {% else %}
+            <label>4-Wheeler Parking is FULL</label>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <div>
+            {% if slots.two_wheeler_count > 0 or slots.four_wheeler_count > 0 %}
+            <a href="{% url 'parking_lot_app:entry' %}">ENTRY</a>
+            {% else %}
+            <label>Parking is Full</label>
+            {% endif %}
+        </div>
+        
+        <div>
+            {% if slots.two_wheeler_count == 5 and slots.four_wheeler_count == 5 %}
+            <label>Parking is Empty</label>
+            {% else %}
+            <a href="{% url 'parking_lot_app:exit' %}">EXIT</a>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <p>Ticket Lost? <a href="{% url 'parking_lot_app:ticket_lost' %}">Click here</a>.</p>
+    </div>
+    <div>
+        {% if slots.two_wheeler_count == 5 and slots.four_wheeler_count == 5 %}
+        <p>Parking is Empty</p>
+        {% else %}
+        <p>Scanner not working? Do a <a href="{% url 'parking_lot_app:manual_exit' %}">Manual Exit</a> here.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

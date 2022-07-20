@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<form action="{% url 'parking_lot_app:exit' %}" method="post">
+    {% csrf_token %}
+    <label>Parking ID: </label>
+    <input type="text" name="referenceid" id="referenceid" value="{{ parking.reference_id }}"><br/>
+    <label>In-Time: </label>
+    <label name="intime" id="intime">{{ parking.in_time }}</label><br/>
+    <label>Out-Time: </label>
+    <label name="outtime" id="outtime">{{ parking.out_time }}</label><br/>
+    <label>Vehicle Type: </label>
+    {% if parking.vehicle_type == '2-WHEELER' %}
+    <label id="two_wheeler">2-WHEELER</label><br/>
+    {% elif parking.vehicle_type == '4-WHEELER' %}
+    <label id="four_wheeler">4-WHEELER</label><br/>
+    {% endif %}
+    <label>Amount: </label>
+    <label name="amount" id="amount">₹{{ parking.amount }}</label><br/>
+    <input type="submit" value="Exit">
+    <a href="{% url 'parking_lot_app:index' %}">Cancel</a>
+</form>
+{% endblock %}

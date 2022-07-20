@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<h1>Welcome to XYZ</h1>
+<p><b>In-Time: </b>{{ parking.in_time }}</p>
+<!-- <p><b>Out-Time: </b>{{ parking.out_time }}</p><br/> -->
+<p><b>Vehicle Type: </b>{{ parking.vehicle_type }}</p>
+<p><b>Parkind ID: </b>{{ parking.reference_id }}</p>
+<img src="{{ path }}" alt="QR Code Here" />
+{% if parking.vehicle_type == '2-WHEELER' %}
+<p><label>First Hour ₹30</label></p>
+<p><label>Additional ₹20/hour</label></p>
+{% elif parking.vehicle_type == '4-WHEELER' %}
+<p><label>First Hour ₹50</label></p>
+<p><label>Additional ₹20/hour</label></p>
+<p><label>Ticket Lost? ₹200</label></p>
+{% endif %}
+<a href="{% url 'parking_lot_app:print_ticket' ref=parking.reference_id %}">Print Ticket</a>
+<a href="{% url 'parking_lot_app:index' %}">Home</a>
+{% endblock %}

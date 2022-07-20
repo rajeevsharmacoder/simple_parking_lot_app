@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Parking Lot
+        </title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" href="{% static 'parking_lot_app/style.css' %}">
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        
+        <div id="heading-parking-lot">
+            <h1>
+                PARKING LOT SYSTEM
+            </h1>
+        </div>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

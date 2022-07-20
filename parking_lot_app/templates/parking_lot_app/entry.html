@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block head %}
+{% endblock %}
+{% block body %}
+<form action="{% url 'parking_lot_app:entry' %}" method="post">
+    {% csrf_token %}
+    <label>In-Time: </label>
+    <label name="intime" id="intime">{{ current_datetime }}</label><br/>
+    <label>Vehicle Type: </label>
+    {% if slots.two_wheeler_count > 0 %}
+    <input type="radio" id="vehicle_type" name="vehicle_type" value="2-WHEELER" required>
+    <label id="two_wheeler">2-WHEELER</label>
+    {% else %}
+    <p>2-WHEELER Parking is FULL</p>
+    {% endif %}
+    {% if slots.four_wheeler_count > 0 %}
+    <input type="radio" id="vehicle_type" name="vehicle_type" value="4-WHEELER" required>
+    <label id="four_wheeler">4-WHEELER</label><br>
+    {% else %}
+    <p>4-WHEELER Parking is FULL</p>
+    {% endif %}
+    <label name="current_count">Remaining Spots: 2-Wheeler: {{ slots.two_wheeler_count }}, 4-Wheeler: {{ slots.four_wheeler_count }}</label><br/>
+    {% if slots.two_wheeler_count == 0 and slots.four_wheeler_count == 0 %}
+    <label>Parking is Full</label>
+    {% else %}
+    <input type="submit" value="Enter">
+    {% endif %}
+    <a href="{% url 'parking_lot_app:index' %}">Cancel</a>
+</form>
+{% endblock %}

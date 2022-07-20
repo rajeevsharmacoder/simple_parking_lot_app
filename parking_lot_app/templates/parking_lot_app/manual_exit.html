@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block head %}
+{% endblock %}
+{% block body %}
+{% if message %}
+<p>{{ message }}</p>
+{% endif %}
+<h1>Manual Exit</h1>
+<form action="{% url 'parking_lot_app:manual_exit' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="referenceid" id="referenceid" placeholder="Enter Parking ID" required><br/>
+    <input type="submit" value="Exit">
+    <a href="{% url 'parking_lot_app:index' %}">Cancel</a>
+</form>
+{% endblock %}
